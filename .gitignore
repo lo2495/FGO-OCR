@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+data/train/
+data/rec_gt.txt
+models/*.onnx
+models/*.pt
+models/*.pth
+*.jpg
+*.png
+.DS_Store

@@ -1,0 +1,67 @@
+セイバー
+アーチャー
+ランサー
+ライダー
+キャスター
+アサシン
+バーサーカー
+Saber
+Archer
+Lancer
+Rider
+Caster
+Assassin
+Berserker
+Extra I
+Extra II
+EXTRA I
+EXTRA II
+Grand Duel
+Grand Duel [Extra I]
+Grand Duel [Extra II]
+Grand Duel [Saber]
+Grand Duel [Archer]
+Grand Duel [Lancer]
+Grand Duel [Rider]
+Grand Duel [Caster]
+Grand Duel [Assassin]
+Grand Duel [Berserker]
+冠位戴冠戦
+冠位研鑽戦
+冠位戴冠戦 エクストラⅠ
+冠位戴冠戦 エクストラⅡ
+冠位戴冠戦 セイバー
+冠位戴冠戦 アーチャー
+冠位戴冠戦 ランサー
+冠位戴冠戦 ライダー
+冠位戴冠戦 キャスター
+冠位戴冠戦 アサシン
+冠位戴冠戦 バーサーカー
+冠位研鑽戦〔エクストラⅠ〕 地Ⅶ
+冠位研鑽戦〔エクストラⅠ〕 水Ⅶ
+冠位研鑽戦〔エクストラⅠ〕 火Ⅶ
+冠位研鑽戦〔エクストラⅠ〕 風Ⅶ
+冠位研鑽戦〔エクストラⅡ〕 地Ⅶ
+冠位研鑽戦〔エクストラⅡ〕 水Ⅶ
+冠位研鑽戦〔エクストラⅠ〕 地I
+冠位研鑽戦〔エクストラⅠ〕 地II
+冠位研鑽戦〔エクストラⅠ〕 地III
+冠位研鑽戦〔エクストラⅠ〕 地IV
+冠位研鑽戦〔エクストラⅠ〕 地V
+冠位研鑽戦〔エクストラⅠ〕 地VI
+冠位研鑽戦〔エクストラⅠ〕 地VII
+月光採掘場
+森の奥に謎の巨人の影を見た
+Ⅰ
+Ⅱ
+Ⅲ
+Ⅳ
+Ⅴ
+Ⅵ
+Ⅶ
+Ⅷ
+Ⅸ
+Ⅹ
+AP 40
+AP 20
+消費 40
