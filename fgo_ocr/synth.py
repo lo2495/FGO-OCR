@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
-from fgo_ocr.paths import DATA, LABELS
+from fgo_ocr.paths import ATLAS_NAMES, ATLAS_QUESTS, DATA, LABELS
 
 
 def _fonts() -> list[str]:
@@ -32,7 +32,7 @@ def _load_font(path: str, size: int) -> ImageFont.FreeTypeFont:
 
 
 def load_labels(extra: Path | None = None) -> list[str]:
-    paths = [LABELS]
+    paths = [LABELS, ATLAS_QUESTS, ATLAS_NAMES]
     if extra is not None and extra.is_file():
         paths.append(extra)
     out: list[str] = []
@@ -50,18 +50,10 @@ def load_labels(extra: Path | None = None) -> list[str]:
 
 def _bg(w: int, h: int, rng: random.Random) -> Image.Image:
     base = rng.randint(18, 42)
-    img = Image.new("RGB", (w, h), (base, base - 4, max(8, base - 12)))
-    px = img.load()
-    for y in range(h):
-        for x in range(w):
-            j = rng.randint(-8, 8)
-            r, g, b = px[x, y]
-            px[x, y] = (
-                max(0, min(255, r + j)),
-                max(0, min(255, g + j)),
-                max(0, min(255, b + j // 2)),
-            )
-    return img
+    rgb = np.array([base, max(8, base - 4), max(8, base - 12)], dtype=np.int16)
+    noise = np.random.randint(-8, 9, size=(h, w, 3), dtype=np.int16)
+    arr = np.clip(rgb + noise, 0, 255).astype(np.uint8)
+    return Image.fromarray(arr, mode="RGB")
 
 
 def _gold(rng: random.Random) -> tuple[int, int, int]:
@@ -110,6 +102,7 @@ def generate(
     seed = int(os.environ.get("FGO_OCR_SEED", "7") if seed is None else seed)
     out = Path(os.environ.get("FGO_OCR_OUT", str(out or DATA)))
     rng = random.Random(seed)
+    np.random.seed(seed)
     fonts = _fonts()
     if not fonts:
         raise SystemExit("找不到日文字型。設 FGO_OCR_FONT=C:\\Windows\\Fonts\\YuGothM.ttc")
@@ -118,15 +111,19 @@ def generate(
         raise SystemExit("assets/labels.txt 是空的")
     train_dir = out / "train"
     train_dir.mkdir(parents=True, exist_ok=True)
+    print(f"synth start n={n} labels={len(labels)} fonts={len(fonts)} -> {train_dir}", flush=True)
     gt = []
+    step = max(1, n // 20)
     for i in range(n):
         text = rng.choice(labels)
         img = render(text, rng.choice(fonts), rng)
         name = f"{i:06d}.jpg"
         img.save(train_dir / name, quality=rng.randint(70, 95))
         gt.append(f"train/{name}\t{text}")
+        if (i + 1) % step == 0 or i == 0:
+            print(f"  {i + 1}/{n}", flush=True)
     (out / "rec_gt.txt").write_text("\n".join(gt) + "\n", encoding="utf-8")
-    print(f"wrote {n} images -> {out} fonts={len(fonts)} labels={len(labels)}")
+    print(f"wrote {n} images -> {out} fonts={len(fonts)} labels={len(labels)}", flush=True)
     return out
 
 
