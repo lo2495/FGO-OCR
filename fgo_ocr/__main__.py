@@ -17,10 +17,15 @@ def main() -> None:
 
         synth_main()
         return
-    if cmd in ("train", "train_parseq", "parseq"):
-        from fgo_ocr.train_parseq import main as parseq_main
+    if cmd in ("train_hires", "hires", "train"):
+        from fgo_ocr.train_hires import main as hires_main
 
-        parseq_main()
+        hires_main()
+        return
+    if cmd in ("eval_shots", "eval"):
+        from fgo_ocr.eval_shots import main as eval_main
+
+        eval_main(rest)
         return
     if cmd in ("infer", "check"):
         from fgo_ocr.infer import main as infer_main
@@ -30,8 +35,9 @@ def main() -> None:
     print("FGO-OCR")
     print("  python -m fgo_ocr atlas")
     print("  python -m fgo_ocr synth")
-    print("  python -m fgo_ocr train")
-    print("  python -m fgo_ocr infer")
+    print("  python -m fgo_ocr train_hires")
+    print("  python -m fgo_ocr eval_shots data/eval_holdout")
+    print("  python scripts/run_full.py")
 
 
 if __name__ == "__main__":
